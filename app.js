@@ -113,3 +113,11 @@ app.use((err,req,res,next) =>{
     console.log('Express server listening on port ');
   });
 //   server.timeout = 10000;
+
+app.use((req, res, next) => {
+    res.setTimeout(500000, () => { // Adjust timeout as needed (in ms)
+        console.log('Request has timed out.');
+        res.status(408).send('Request Timeout');
+    });
+    next();
+});

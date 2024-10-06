@@ -15,6 +15,7 @@ router.get("/",wrapAsync(listingController.index));
  //create new listing
  router.get("/new",isLoggedIn,listingController.renderNewForm);
 
+ router.get("/filter/:category",wrapAsync(listingController.partials));
  //show particular listing
  router.get("/:id",wrapAsync(listingController.showListing));
  

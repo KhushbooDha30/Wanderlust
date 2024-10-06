@@ -12,6 +12,7 @@ const listingSchema = new Schema({
         url : String,
         filename : String,
     },
+    category : String,
     price : Number,
     location : String,
     country : String,
@@ -35,6 +36,9 @@ const listingSchema = new Schema({
              type: [Number],
              required: true
            },
+        },
+        address : {
+            type : String,
         },
     
 });

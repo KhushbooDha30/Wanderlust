@@ -12,6 +12,23 @@ module.exports.index =  async (req,res)=>{
     res.render("./listings/new.ejs");
  };
 
+module.exports.partials = async (req, res) => {
+    const { category } = req.params;
+
+    try {
+        // Fetch listings with the selected category
+        const filteredListings = await Listing.find({ category: category });
+        if (filteredListings.length === 0) {
+            // Send a specific message if no listings are found
+            return res.send('<div>No results found for this category.</div>');
+        }
+        res.render('./listings/partials/listings.ejs', { allListings: filteredListings });
+    } catch (error) {
+        console.error('Error fetching listings by category:', error);
+        res.status(500).send("Error loading listings");
+    }
+}
+
  module.exports.showListing = async (req,res) =>{
     let {id} = req.params;
     const listing = await Listing.findById(id).populate({path : "reviews",populate : { path : "author",},}).populate("owner");
@@ -31,12 +48,13 @@ module.exports.createListing = async (req,res,next) =>{
         .send()
     let url = req.file.path;
     let filename = req.file.filename;
-
+    console.log(req.body.listing);
     const newListing = new Listing(req.body.listing);
     newListing.owner = req.user._id;
     newListing.image = {url,filename};
     newListing.geometry = response.body.features[0].geometry
     let savedListing = await newListing.save();
+    
     console.log(savedListing);
     req.flash("success" ,"New listing created!");
     res.redirect("/listings");
