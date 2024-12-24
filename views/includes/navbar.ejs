@@ -30,11 +30,12 @@
           <a class="nav-link" href="/listings">Explore</a>  
         </div>
         <div class="navbar-nav ms-auto">
-          <form class="d-flex" role="search">
-            <input class="form-control me-2 search-in" type="search" placeholder="Search Destinations" aria-label="Search">
+          <form class="d-flex" id="searchForm">
+            <input class="form-control me-2 search-in" type="search" id="searchInput" placeholder="Search By City" aria-label="Search">
             <button class="btn btn-search" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
           </form>
         </div>
+        
         <div class="navbar-nav ms-auto">
           <a class="nav-link" href="/listings/new">Airbnb your home</a>
           <% if(!currUser) { %>
@@ -48,3 +49,33 @@
       </div>
     </div>
   </nav>
+
+
+  <script>
+    document.getElementById('searchForm').addEventListener('submit', function (e) {
+      e.preventDefault(); // Prevent form from refreshing the page
+  
+      const query = document.getElementById('searchInput').value.trim();
+      if (query) {
+        // Fetch search results using AJAX
+        fetch(`/listings/search?city=${encodeURIComponent(query)}`)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.text();
+          })
+          .then(data => {
+            // Update the listings container with the new search results
+            document.querySelector('.listings-container').innerHTML = data;
+          })
+          .catch(error => {
+            console.error('Error fetching search results:', error);
+            alert('An error occurred while searching.');
+          });
+      } else {
+        alert('Please enter a city to search!');
+      }
+    });
+  </script>
+  

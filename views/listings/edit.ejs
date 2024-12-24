@@ -40,7 +40,30 @@
                      <input type="text" name="listing[country]" value="<%=listing.country%>" class="form-control" required>
                      <div class="invalid-feedback">Country name should be valid</div>
                   </div>
-                  
+
+                 
+
+<div class="mb-3">
+    <label for="city" class="form-label">City</label>
+    <select class="form-select" name="listing[city]" required>
+        <option value="indore" <% if (listing.city === "indore") { %>selected<% } %>>Indore</option>
+        <option value="ahmedabad" <% if (listing.city === "ahmedabad") { %>selected<% } %>>Ahmedabad</option>
+        <option value="Bangalore" <% if (listing.city === "Bangalore") { %>selected<% } %>>Bangalore</option>
+        <option value="Bhopal" <% if (listing.city === "Bhopal") { %>selected<% } %>>Bhopal</option>
+        <option value="Chandigarh" <% if (listing.city === "Chandigarh") { %>selected<% } %>>Chandigarh</option>
+        <option value="Chennai" <% if (listing.city === "Chennai") { %>selected<% } %>>Chennai</option>
+        <option value="Delhi" <% if (listing.city === "Delhi") { %>selected<% } %>>Delhi</option>
+        <option value="Hyderabad" <% if (listing.city === "Hyderabad") { %>selected<% } %>>Hyderabad</option>
+        <option value="Jaipur" <% if (listing.city === "Jaipur") { %>selected<% } %>>Jaipur</option>
+        <option value="Kolkata" <% if (listing.city === "Kolkata") { %>selected<% } %>>Kolkata</option>
+        <option value="Mumbai" <% if (listing.city === "Mumbai") { %>selected<% } %>>Mumbai</option>
+        <option value="Pune" <% if (listing.city === "Pune") { %>selected<% } %>>Pune</option>
+        <option value="Surat" <% if (listing.city === "Surat") { %>selected<% } %>>Surat</option>
+        <option value="Aizawl" <% if (listing.city === "Aizawl") { %>selected<% } %>>Aizawl</option>
+        <option value="Shillong" <% if (listing.city === "Shillong") { %>selected<% } %>>Shillong</option>
+    </select>
+    <div class="invalid-feedback">City should be valid</div>
+                  </div>
                   <div class="mb-3">
                      <label for="location" class="form-label">Location</label>
                      <input type="text" name="listing[location]" value="<%=listing.location%>" class="form-control" required>
